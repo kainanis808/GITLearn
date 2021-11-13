@@ -11,6 +11,10 @@ class PurePursuit:
 
     def __init__(self):
         self.k = [1,2]     #proportionality constant
+                           #[gain on u, gain on r]
+        self.maxspeed = 2   #set maximum commanded speed limits
+                            #u, v, r of the follower are all limited
+                            #to plus or minus this value.
         self.pose_enu = {'L':{'x':0,'y':0,'psi':0},
                      'F':{'x':0,'y':0,'psi':0}}
         self.nu_b = [0,0,0]
@@ -48,12 +52,11 @@ class PurePursuit:
         self.nu_b[2] = self.k[1]*beta
 
     def limit_nu(self):
-        L = 2
         for i in range(3):
-            if self.nu_b[i] > L:
-                self.nu_b[i] = L
-            elif self.nu_b[i] < -L:
-                self.nu_b[i] = -L
+            if self.nu_b[i] > self.maxspeed:
+                self.nu_b[i] = self.maxspeed
+            elif self.nu_b[i] < -self.maxspeed:
+                self.nu_b[i] = -self.maxspeed
 
 
 class PurePursuitROSWrapper:
