@@ -2,5 +2,4 @@
 Super Simple Repository for learning git/github for ME696
 
 ## Directory Descriptions
--Exercises
--Simulation
+- [TurtleSimScripts](./TurtleSimScripts), Contains python files used during lecture to interact with the turtlesim node.
