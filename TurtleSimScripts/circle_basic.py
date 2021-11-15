@@ -12,10 +12,11 @@ def kinematicCircleVelocity():
 
     rate = rospy.Rate(1)
 
-    t_1rot = 30 #[s], time it takes to make one rotation
-    omega = 2*pi/t_1rot
+    circle = rospy.get_param("/circle",{'time':30, 'radius':4})
+    #t_1rot = 30 #[s], time it takes to make one rotation
+    omega = 2*pi/circle['time']
 
-    R = 4
+    R = circle['radius']
 
     u = R*omega
 
