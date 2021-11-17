@@ -4,11 +4,8 @@ import rospy
 
 from turtlesim.msg import Pose
 from geometry_msgs.msg import Twist
-from std_srvs.srv import Trigger
 
 from math import sqrt, sin, cos, atan2, pi
-
-from config_window import config_window
 
 class PurePursuit:
 
@@ -65,17 +62,14 @@ class PurePursuit:
 class PurePursuitROSWrapper:
     
     def __init__(self):
-        # Initialize a Pure Pursuit path planning object
+        #Initialize a Pure Pursuit path planning object
         self.pp = PurePursuit()
 
-        # Create subscribers
-        ## Topics
+        #Create subscribers
         rospy.Subscriber("/follower/pose", Pose, self.pose_follower)
         rospy.Subscriber("/leader/pose", Pose, self.pose_leader)
-        ## Services
-        rospy.Service("config_window", Trigger, config_window)
 
-        #Create publishers
+        #Create publisher
         self.publish_velocity = rospy.Publisher("/follower/cmd_vel",
                                            Twist, 
                                            queue_size=10)
