@@ -168,6 +168,7 @@ include_directories(
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
 install(PROGRAMS
     nodes/circle_basic
+    nodes/pp_ros
     scripts/config_window
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

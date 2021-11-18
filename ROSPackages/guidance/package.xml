@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>pure_pursuit</name>
+  <name>guidance</name>
   <version>0.0.0</version>
-  <description>The pure_pursuit package</description>
+  <description>The guidance package</description>
 
   <maintainer email="atrimble@hawaii.edu">
     A Trimble, Director RIP Lab
