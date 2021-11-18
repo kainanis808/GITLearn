@@ -6,7 +6,7 @@ from turtlesim.msg import Pose
 from geometry_msgs.msg import Twist
 from std_srvs.srv import Trigger
 
-from pure_pursuit.pp import PurePursuit
+from pure_pursuit import PurePursuit
 
 class PurePursuitROSWrapper:
     
