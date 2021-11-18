@@ -1,0 +1,6 @@
+circle: 
+    radius: 4.
+    time: 10.
+    center:
+        x: 5
+        y: 5

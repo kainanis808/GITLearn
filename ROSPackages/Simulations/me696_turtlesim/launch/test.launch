@@ -1,0 +1,18 @@
+<launch>
+    <!-- First launch the standard turtlesim node -->
+    <node name="turtlesim"
+          pkg="turtlesim" 
+          type="turtlesim_node"
+          output="screen">
+    </node>
+
+    <!-- Read in the parameters from the config file -->
+    <rosparam file="$(find me696_turtlesim)/config/pp_circle_config.yaml"/>
+
+    <node name="turtlesim_config"
+          pkg="me696_turtlesim"
+          type="config_window"
+          output="screen">
+    </node>
+
+</launch>
