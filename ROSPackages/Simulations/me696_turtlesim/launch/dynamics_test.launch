@@ -6,12 +6,20 @@
           output="screen">
     </node>
 
-    <!-- Read in the parameters from the config file -->
+    <!-- Read in custom parameters from the config file -->
     <rosparam file="$(find me696_turtlesim)/config/pp_circle_config.yaml"/>
 
+    <!-- Use the custom parameters to set up the turtlesim window -->
     <node name="turtlesim_config"
           pkg="me696_turtlesim"
           type="config_window"
+          output="screen">
+    </node>
+
+    <!-- Start the leader moving using the circle behavior -->
+    <node name="leader_path"
+          pkg="me696_turtlesim"
+          type="leaderBehavior_circle"
           output="screen">
     </node>
 

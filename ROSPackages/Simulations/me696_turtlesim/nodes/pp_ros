@@ -4,7 +4,6 @@ import rospy
 
 from turtlesim.msg import Pose
 from geometry_msgs.msg import Twist
-from std_srvs.srv import Trigger
 
 from pure_pursuit import PurePursuit
 

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(me696_turtlesim)
+project(parameter_server)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,9 +8,9 @@ project(me696_turtlesim)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  dynamic_reconfigure
   rospy
-  std_srvs
-  turtlesim
+  std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -20,7 +20,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
 ## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
-catkin_python_setup()
+# catkin_python_setup()
 
 ################################################
 ## Declare ROS messages, services and actions ##
@@ -70,7 +70,7 @@ catkin_python_setup()
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
+#   std_msgs
 # )
 
 ################################################
@@ -92,6 +92,13 @@ catkin_python_setup()
 #   cfg/DynReconf1.cfg
 #   cfg/DynReconf2.cfg
 # )
+generate_dynamic_reconfigure_options(
+    config/circle.cfg
+    config/follower.cfg
+)
+
+# make sure configure headers are built before any node using them
+# add_dependencies(example_node ${PROJECT_NAME}_gencfg)
 
 ###################################
 ## catkin specific configuration ##
@@ -104,8 +111,8 @@ catkin_python_setup()
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES me696_turtlesim
-#  CATKIN_DEPENDS rospy std_srvs turtlesim
+#  LIBRARIES parameter_server
+#  CATKIN_DEPENDS dynamic_reconfigure rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -122,7 +129,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/me696_turtlesim.cpp
+#   src/${PROJECT_NAME}/parameter_server.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -133,7 +140,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/me696_turtlesim_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/parameter_server_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -167,10 +174,7 @@ include_directories(
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
 install(PROGRAMS
-    nodes/dynamics_mithc
-    nodes/leaderBehaviour_circle
-    nodes/pp_ros
-    scripts/config_window
+    nodes/server
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -201,7 +205,7 @@ install(PROGRAMS
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_me696_turtlesim.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_parameter_server.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
