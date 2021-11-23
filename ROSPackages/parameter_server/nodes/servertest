@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+
+import rospy
+
+from dynamic_reconfigure.server import Server
+from parameter_server.cfg import circleConfig
+
+r = 0
+t = 0
+
+def callback(config, level):
+    print('Running callback function')
+    print(config)
+    r = config['radius']
+    t = config['time']
+    return config
+
+def clean_params():
+    print('Running clean_params')
+    try:
+        rospy.delete_param('/circle/radius')
+        rospy.delete_param('/circle/time')
+    except KeyError:
+        rospy.log("One or more parameters wasn't actually set")
+
+if __name__ == "__main__":
+    rospy.init_node('params_circle', anonymous = False)
+    
+    rosrate = rospy.Rate(1)
+    Srv = Server(circleConfig, callback)
+    while not rospy.is_shutdown():
+        print('r = '+str(r)+', t = '+str(t))
+        rosrate.sleep()
+
+    rospy.on_shutdown(clean_params)

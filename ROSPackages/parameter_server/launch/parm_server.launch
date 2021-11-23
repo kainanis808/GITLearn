@@ -1,0 +1,10 @@
+<launch>
+    <!-- Circle Configuration Server Node-->
+    <node 
+        name="circle"
+        pkg="parameter_server" 
+        type="params_circle"
+        output="screen">
+    </node>
+
+</launch>

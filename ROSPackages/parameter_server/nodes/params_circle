@@ -3,14 +3,10 @@
 import rospy
 
 from dynamic_reconfigure.server import Server
-from parameter_server.cfg import circleConfig, followerConfig
+from parameter_server.cfg import circleConfig
 
 def callback(config, level):
     rospy.loginfo("""Reconfigure Request: {time}, {radius}""".format(**config))
-    return config
-
-def callback_follower(config, level):
-    rospy.loginfo("""Reconfigure Request: {Kp_u}, {Kp_r}, {umax}""".format(**config))
     return config
 
 def clean_params():
@@ -19,13 +15,16 @@ def clean_params():
         rospy.delete_param('/circle/radius')
         rospy.delete_param('/circle/time')
     except KeyError:
-        print("One or more parameters wasn't actually set")
+        rospy.log("One or more parameters wasn't actually set")
+
+def callback_follower(config, level):
+    rospy.loginfo("""Reconfigure Request: {Kp_u}, {Kp_r}, {umax}""".format(**config))
+    return config
 
 if __name__ == "__main__":
-    rospy.init_node('param_server', anonymous = False)
+    rospy.init_node('params_circle', anonymous = False)
 
-    #circSrv = Server(circleConfig, callback)
-    follSrv = Server(followerConfig, callback_follower)
+    Srv = Server(circleConfig, callback)
     rospy.spin()
 
     rospy.on_shutdown(clean_params)
