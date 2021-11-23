@@ -12,7 +12,7 @@
     <!-- Use the parameter file to configure the turtlesim window -->
     <node name="turtlesim_config"
           pkg="me696_turtlesim"
-          type="config_window"
+          type="config_window.py"
           output="screen">
     </node>
     

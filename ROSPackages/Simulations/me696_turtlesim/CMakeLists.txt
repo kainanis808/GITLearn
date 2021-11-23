@@ -170,7 +170,7 @@ install(PROGRAMS
     nodes/dynamics_mithc
     nodes/leaderBehaviour_circle
     nodes/pp_ros
-    scripts/config_window
+    scripts/config_window.py
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
