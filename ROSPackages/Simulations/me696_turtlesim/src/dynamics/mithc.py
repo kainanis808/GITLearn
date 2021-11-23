@@ -21,4 +21,4 @@ class MITHoverCraftDynamics:
 
         self.nu0 = self.nu1
 
-        return self.nu0
+        return self.nu1

@@ -9,18 +9,21 @@
     <!-- Read in the parameters from the config file -->
     <rosparam file="$(find me696_turtlesim)/config/pp_circle_config.yaml"/>
 
+    <!-- Use the parameter file to configure the turtlesim window -->
     <node name="turtlesim_config"
           pkg="me696_turtlesim"
           type="config_window"
           output="screen">
     </node>
-
+    
+    <!-- Start the leader moving on a prescribed path -->
     <node name="leader_path"
           pkg="me696_turtlesim"
           type="leaderBehavior_circle"
           output="screen">
     </node>
 
+    <!-- Start the pure pursuit algorithm to create desired velocity -->
     <node name="follower_pure_pursuit"
           pkg="me696_turtlesim"
           type="pp_ros"
