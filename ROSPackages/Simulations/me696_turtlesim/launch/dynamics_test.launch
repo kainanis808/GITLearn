@@ -12,7 +12,7 @@
     <!-- Use the custom parameters to set up the turtlesim window -->
     <node name="turtlesim_config"
           pkg="me696_turtlesim"
-          type="config_window"
+          type="config_window.py"
           output="screen">
     </node>
 
@@ -21,6 +21,21 @@
           pkg="me696_turtlesim"
           type="leaderBehavior_circle"
           output="screen">
+    </node>
+
+    <!-- Start the follower dynamics -->
+    <node name="follower_dynamics"
+          pkg="me696_turtlesim"
+          type="dynamics_mithc"
+          output="screen">
+    </node>
+
+    <!-- Start the pure_pursuit guidance-->
+    <node name="follower_guidance_pp"
+          pkg="guidance"
+          type="pp_ros"
+          output="screen">
+        <remap from="/follower/cmd_vel" to="/follower/d_vel"/>
     </node>
 
 </launch>
