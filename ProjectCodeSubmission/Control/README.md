@@ -5,6 +5,7 @@ This is a README for the controller portion of the GNC scheme.
 Operator should call upon the script and pass arguments to redefine PID gains. The format follows:
 
 > controllerReset.py *P<sub>fwd_vel</sub> I<sub>fwd_vel</sub> D<sub>fwd_vel</sub> P<sub>yaw_rate</sub> I<sub>yaw_rate</sub> D<sub>yaw_rate</sub>*
+
 An example is shown below:
 > controllerReset.py 40 2 20 60 0 20
 
